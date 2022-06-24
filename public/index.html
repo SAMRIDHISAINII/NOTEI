@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="darkmode.css">
+    <link rel="stylesheet" href="media.css">
+    <title>Notes</title>
+</head>
+
+<body id="main" class="container">
+    <header>
+        <nav class="container row">
+            <a class="col-10" href="index.html">notefy</a>
+            <div onclick="googleLogin()" title="Login" id="login-circle" class="circle-login">
+                <img id="login-circle-img" src="" style="max-width: 50px; max-height: 50px;" alt="" />
+                <div id="login-circle-face" class="face-login"></div>
+                <div id="login-circle-body" class="body-login"></div>
+            </div>
+        </nav>
+    </header>
+    <section class="container">
+        <h1>Write whatever <br> you want to!</h1>
+        <p>This website helps you to create <br> helpful notes, make greatest plans<br>
+            your day wherever you are.</p>
+        <a href="create.html">Create Notes</a>
+        <div class="container">
+            <div class="whole-cube px-3">
+                <div class="scene">
+                    <div class="cube">
+                        <div class="face face--front"></div>
+                        <div class="face face--back"></div>
+                        <div class="face face--right"></div>
+                        <div class="face face--left"></div>
+                        <div class="face face--top"></div>
+                        <div class="face face--bottom"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="theme-box">
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" onclick="darkTheme()" id="checkbox" />
+                <div class="slider round"></div>
+            </label>
+        </div>
+    </section>
+    <div class="pen">
+        <img src="pen.svg" alt="">
+    </div>
+    <div class="page">
+        <img src="notes.png" alt="">
+        <!-- <img src="notes.png" alt="">
+        <img src="notes.png" alt="">
+        <img src="notes.png" alt=""> -->
+    </div>
+    <footer class="d-flex">
+        <div class="copyright">
+            <p>&copy;notefy. 2021. All rights reserved.</p>
+            
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+        crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+    <script src="theme.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCBkZGf2QbiAN81fl9BMwjvMBMaCEozbTE",
+            authDomain: "msms-224ad.firebaseapp.com",
+            databaseURL: "https://msms-224ad.firebaseio.com",
+            projectId: "msms-224ad",
+            storageBucket: "msms-224ad.appspot.com",
+            messagingSenderId: "615277990639",
+            appId: "1:615277990639:web:33291a1d7843b4f162411a"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        let provider = new firebase.auth.GoogleAuthProvider();
+
+        function googleLogin() {
+            firebase.auth().signInWithPopup(provider).then(result => {
+                console.log(result.user);
+                showUserData(result.user);
+                document.getElementById('login-circle-face').style.display = 'none';
+                document.getElementById('login-circle-body').style.display = 'none';
+            }).catch(error => {
+                console.log(error);
+            })
+        }
+
+        function showUserData(user) {
+            document.getElementById('login-circle-img').src = `${user.photoURL}`
+        }
+
+        function checkAuthState() {
+            firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                    document.getElementById('login-circle-img').style.display = 'block';
+                    document.getElementById('login-circle-face').style.display = 'none';
+                    document.getElementById('login-circle-body').style.display = 'none';
+                    showUserData(user)
+                } else {
+
+                }
+            })
+        }
+        checkAuthState();
+    </script>
+</body>
+
+</html>

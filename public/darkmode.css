@@ -1,0 +1,108 @@
+:root {
+    --white: #ece4de;
+    --white-shadow: #ece4de57;
+    --orange: #ff9900;
+    --orange-2: #ffab3e;
+    --orange-3: #ffca58;
+    --orange-4: #e0982c;
+    --orange-5: #dd8a0d;
+    --orange-6: #ffad32;
+    --offorange: #FFC55C;
+    --light-orange: #FFD68A;
+    --dark-orange: #ba6f00;
+    --brown: #85603f;
+    --black: #161719;
+}
+
+.theme-switch-wrapper {
+    display: flex;
+    padding-top: 0.5vw;
+    align-items: center;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 2vw;
+    position: relative;
+    width: 4vw;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.slider {
+    background-color: #d1cdc6;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: 0.4s;
+}
+
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 1.5vw;
+    left: 4px;
+    position: absolute;
+    transition: 0.5s;
+    width: 1.5vw;
+}
+
+input:checked+.slider {
+    background-color: #ff9900;
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 2vw;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.theme-box {
+    position: fixed;
+    top: 5.5%;
+    right: 7%;
+    transform: translate(-50%, -50%);
+}
+
+.dark-mode-body,
+.dark-mode-body header nav a,
+.dark-mode-body header nav a:hover,
+.dark-mode-body header nav a:focus,
+.dark-mode-body section h1,
+.dark-mode-body section p,
+.dark-mode-body .copyright p,
+.dark-mode-body .copyright a,
+.dark-mode-body .copyright a:hover,
+.dark-mode-body .copyright a:focus {
+    background: var(--black);
+    color: var(--white);
+}
+
+.dark-mode-body .pen {
+    filter: hue-rotate(5deg) drop-shadow(3mm 2mm 5mm var(--white-shadow));
+}
+
+.dark-mode-body .whole-cube {
+    filter: drop-shadow(2mm 2mm 2mm var(--white-shadow));
+}
+
+.dark-mode-body .circle-login {
+    border: 2px solid var(--white);
+}
+
+.dark-mode-body .circle-login:hover,
+.circle-login:focus {
+    box-shadow: 0 0 7px var(--white);
+}
